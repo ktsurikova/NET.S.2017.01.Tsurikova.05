@@ -7,10 +7,19 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
+    /// <summary>
+    /// class provides additional methods for numbers
+    /// </summary>
     public class NumberExtensions
     {
         #region Gcd
 
+        /// <summary>
+        /// calculate greatest common divisor for a and b
+        /// </summary>
+        /// <param name="a">one number</param>
+        /// <param name="b">second number</param>
+        /// <returns>greatest common divisor for a and b</returns>
         public static int Gcd(int a, int b)
         {
             if (a == 0) return b;
@@ -28,12 +37,27 @@ namespace Logic
             return a;
         }
 
+        /// <summary>
+        /// calculate greatest common divisor for a, b and c
+        /// </summary>
+        /// <param name="a">first number</param>
+        /// <param name="b">second number</param>
+        /// <param name="c">third number</param>
+        /// <returns>common divisor for a, b and c</returns>
         public static int Gcd(int a, int b, int c) => Gcd(Gcd(a, b), c);
 
+        /// <summary>
+        /// calculate greatest common divisor for more then 3 numbers
+        /// </summary>
+        /// <param name="arg">numbers for which calculates gcd</param>
+        /// <exception cref="ArgumentNullException">throws when arg is null</exception>
+        /// <returns>greatest common divisor for arg</returns>
         public static int Gcd(int[] arg)
         {
-            int result = arg[0];
+            if (ReferenceEquals(arg, null)) throw new ArgumentNullException($"{nameof(arg)} is null");
+            if (arg.Length == 0) return 0;
 
+            int result = arg[0];
             for (int i = 1; i < arg.Length; i++)
             {
                 result = Gcd(result, arg[i]);
@@ -46,6 +70,13 @@ namespace Logic
 
         #region GcdTime
 
+        /// <summary>
+        /// calculate gcd and define time elapsed
+        /// </summary>
+        /// <param name="a">first number</param>
+        /// <param name="b">second number</param>
+        /// <param name="time">time elapsed</param>
+        /// <returns>gcd for a and b</returns>
         public static int Gcd(int a, int b, out TimeSpan time)
         {
             Stopwatch watch = new Stopwatch();
@@ -59,6 +90,14 @@ namespace Logic
             return result;
         }
 
+        /// <summary>
+        /// calculate gcd and define time elapsed
+        /// </summary>
+        /// <param name="a">first number</param>
+        /// <param name="b">second number</param>
+        /// <param name="c">third number</param>
+        /// <param name="time">time elapsed</param>
+        /// <returns>gcd for a, b and c</returns>
         public static int Gcd(int a, int b, int c, out TimeSpan time)
         {
             Stopwatch watch = new Stopwatch();
@@ -72,6 +111,12 @@ namespace Logic
             return result;
         }
 
+        /// <summary>
+        /// calculate gcd and define time elapsed
+        /// </summary>
+        /// <param name="arg">numbers for which gcd calculates</param>
+        /// <param name="time">time elapsed</param>
+        /// <returns>gcd for numbers</returns>
         public static int Gcd(int[] arg, out TimeSpan time)
         {
             Stopwatch watch = new Stopwatch();
@@ -89,6 +134,12 @@ namespace Logic
 
         #region GcdBinary
 
+        /// <summary>
+        /// calculate greatest common divisor for a and b
+        /// </summary>
+        /// <param name="a">one number</param>
+        /// <param name="b">second number</param>
+        /// <returns>greatest common divisor for a and b</returns>
         public static int GcdBinary(int a, int b)
         {
             if (a == 0) return b;
@@ -120,12 +171,27 @@ namespace Logic
             return a << shift;
         }
 
+        /// <summary>
+        /// calculate greatest common divisor for a, b and c
+        /// </summary>
+        /// <param name="a">first number</param>
+        /// <param name="b">second number</param>
+        /// <param name="c">third number</param>
+        /// <returns>common divisor for a, b and c</returns>
         public static int GcdBinary(int a, int b, int c) => GcdBinary(GcdBinary(a, b), c);
 
+        /// <summary>
+        /// calculate greatest common divisor for more then 3 numbers
+        /// </summary>
+        /// <param name="arg">numbers for which calculates gcd</param>
+        /// <exception cref="ArgumentNullException">throws when arg is null</exception>
+        /// <returns>greatest common divisor for arg</returns>
         public static int GcdBinary(int[] arg)
         {
-            int result = arg[0];
+            if (ReferenceEquals(arg, null)) throw new ArgumentNullException($"{nameof(arg)} is null");
+            if (arg.Length == 0) return 0;
 
+            int result = arg[0];
             for (int i = 1; i < arg.Length; i++)
             {
                 result = GcdBinary(result, arg[i]);
@@ -138,6 +204,13 @@ namespace Logic
 
         #region GcdTimeBinary
 
+        /// <summary>
+        /// calculate gcd and define time elapsed
+        /// </summary>
+        /// <param name="a">first number</param>
+        /// <param name="b">second number</param>
+        /// <param name="time">time elapsed</param>
+        /// <returns>gcd for a and b</returns>
         public static int GcdBinary(int a, int b, out TimeSpan time)
         {
             Stopwatch watch = new Stopwatch();
@@ -151,6 +224,14 @@ namespace Logic
             return result;
         }
 
+        /// <summary>
+        /// calculate gcd and define time elapsed
+        /// </summary>
+        /// <param name="a">first number</param>
+        /// <param name="b">second number</param>
+        /// <param name="c">third number</param>
+        /// <param name="time">time elapsed</param>
+        /// <returns>gcd for a, b and c</returns>
         public static int GcdBinary(int a, int b, int c, out TimeSpan time)
         {
             Stopwatch watch = new Stopwatch();
@@ -164,6 +245,12 @@ namespace Logic
             return result;
         }
 
+        /// <summary>
+        /// calculate gcd and define time elapsed
+        /// </summary>
+        /// <param name="arg">numbers for which gcd calculates</param>
+        /// <param name="time">time elapsed</param>
+        /// <returns>gcd for numbers</returns>
         public static int GcdBinary(int[] arg, out TimeSpan time)
         {
             Stopwatch watch = new Stopwatch();
