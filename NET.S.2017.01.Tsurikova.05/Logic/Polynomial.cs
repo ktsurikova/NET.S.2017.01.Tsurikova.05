@@ -227,7 +227,7 @@ namespace Logic
 
             for (int i = 0; i < Degree; i++)
             {
-                if (!(Math.Abs(coefficients[i] - other.coefficients[i]) < Epsilon)) return false;
+                if (!(Math.Abs(this[i] - other[i]) < Epsilon)) return false;
             }
 
             return true;
