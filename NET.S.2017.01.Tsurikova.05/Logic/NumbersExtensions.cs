@@ -77,7 +77,7 @@ namespace Logic
         /// <param name="b">second number</param>
         /// <param name="time">time elapsed</param>
         /// <returns>gcd for a and b</returns>
-        public static int Gcd(int a, int b, out TimeSpan time)
+        public static int Gcd(int a, int b, out long time)
         {
             Stopwatch watch = new Stopwatch();
 
@@ -85,7 +85,7 @@ namespace Logic
             int result = Gcd(a, b);
             watch.Stop();
 
-            time = watch.Elapsed;
+            time = watch.ElapsedMilliseconds;
 
             return result;
         }
@@ -98,7 +98,7 @@ namespace Logic
         /// <param name="c">third number</param>
         /// <param name="time">time elapsed</param>
         /// <returns>gcd for a, b and c</returns>
-        public static int Gcd(int a, int b, int c, out TimeSpan time)
+        public static int Gcd(int a, int b, int c, out long time)
         {
             Stopwatch watch = new Stopwatch();
 
@@ -106,7 +106,7 @@ namespace Logic
             int result = Gcd(a, b, c);
             watch.Stop();
 
-            time = watch.Elapsed;
+            time = watch.ElapsedMilliseconds;
 
             return result;
         }
@@ -117,7 +117,7 @@ namespace Logic
         /// <param name="arg">numbers for which gcd calculates</param>
         /// <param name="time">time elapsed</param>
         /// <returns>gcd for numbers</returns>
-        public static int Gcd(int[] arg, out TimeSpan time)
+        public static int Gcd(int[] arg, out long time)
         {
             Stopwatch watch = new Stopwatch();
 
@@ -125,7 +125,7 @@ namespace Logic
             int result = Gcd(arg);
             watch.Stop();
 
-            time = watch.Elapsed;
+            time = watch.ElapsedMilliseconds;
 
             return result;
         }
@@ -211,7 +211,7 @@ namespace Logic
         /// <param name="b">second number</param>
         /// <param name="time">time elapsed</param>
         /// <returns>gcd for a and b</returns>
-        public static int GcdBinary(int a, int b, out TimeSpan time)
+        public static int GcdBinary(int a, int b, out long time)
         {
             Stopwatch watch = new Stopwatch();
 
@@ -219,7 +219,7 @@ namespace Logic
             int result = GcdBinary(a, b);
             watch.Stop();
 
-            time = watch.Elapsed;
+            time = watch.ElapsedMilliseconds;
 
             return result;
         }
@@ -232,7 +232,7 @@ namespace Logic
         /// <param name="c">third number</param>
         /// <param name="time">time elapsed</param>
         /// <returns>gcd for a, b and c</returns>
-        public static int GcdBinary(int a, int b, int c, out TimeSpan time)
+        public static int GcdBinary(int a, int b, int c, out long time)
         {
             Stopwatch watch = new Stopwatch();
 
@@ -240,7 +240,7 @@ namespace Logic
             int result = GcdBinary(a, b, c);
             watch.Stop();
 
-            time = watch.Elapsed;
+            time = watch.ElapsedMilliseconds;
 
             return result;
         }
@@ -251,7 +251,7 @@ namespace Logic
         /// <param name="arg">numbers for which gcd calculates</param>
         /// <param name="time">time elapsed</param>
         /// <returns>gcd for numbers</returns>
-        public static int GcdBinary(int[] arg, out TimeSpan time)
+        public static int GcdBinary(int[] arg, out long time)
         {
             Stopwatch watch = new Stopwatch();
 
@@ -259,7 +259,7 @@ namespace Logic
             int result = GcdBinary(arg);
             watch.Stop();
 
-            time = watch.Elapsed;
+            time = watch.ElapsedMilliseconds;
 
             return result;
         }
