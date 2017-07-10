@@ -22,7 +22,7 @@ namespace Logic.Tests
         public static void Indexer_InvalidIndex_IndexOutOfRangeException(double[] array, int index)
         {
             Polynomial p = new Polynomial(array);
-            Assert.Throws<IndexOutOfRangeException>(() =>
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 var d = p[index];
             });
