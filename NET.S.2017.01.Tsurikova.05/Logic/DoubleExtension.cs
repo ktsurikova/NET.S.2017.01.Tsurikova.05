@@ -12,6 +12,7 @@ namespace Logic
     /// </summary>
     public static class DoubleExtension
     {
+        public const int MaxLenght = 64;
         /// <summary>
         /// method for obtaining binary representation of double
         /// </summary>
@@ -20,7 +21,7 @@ namespace Logic
         public static string GetBinaryRepresentation(this double d)
         {
             StringBuilder sb = new StringBuilder(Convert.ToString(BitConverter.DoubleToInt64Bits(d), 2));
-            while (sb.Length < 64)
+            while (sb.Length < MaxLenght)
             {
                 sb.Insert(0, "0");
             }
@@ -35,11 +36,11 @@ namespace Logic
         public static string GetBinaryRepresentationUnion(this double d)
         {
             InnerUnion sv = new InnerUnion(d);
-
             StringBuilder sb = new StringBuilder("");
+            long unity = 1;
 
-            for (var i = 0; i < sizeof(long) * 8; i++)
-                sb.Append((sv.NL & ((long)1 << (63 - i))) != 0 ? '1' : '0');
+            for (var i = 0; i < MaxLenght; i++)
+                sb.Append((sv.NL & (unity << (MaxLenght - 1 - i))) != 0 ? '1' : '0');
 
             return sb.ToString();
         }
