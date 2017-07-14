@@ -20,12 +20,17 @@ namespace Logic
         /// <returns>binary representation for d</returns>
         public static string GetBinaryRepresentation(this double d)
         {
-            StringBuilder sb = new StringBuilder(Convert.ToString(BitConverter.DoubleToInt64Bits(d), 2));
-            while (sb.Length < MaxLenght)
-            {
-                sb.Insert(0, "0");
-            }
-            return sb.ToString();
+            string sTail = Convert.ToString(BitConverter.DoubleToInt64Bits(d), 2);
+            string sBeg = new string('0', MaxLenght - sTail.Length);
+
+            return sBeg+sTail;
+
+            //StringBuilder sb = new StringBuilder(Convert.ToString(BitConverter.DoubleToInt64Bits(d), 2));
+            //while (sb.Length < MaxLenght)
+            //{
+            //    sb.Insert(0, "0");
+            //}
+            //return sb.ToString();
         }
 
         /// <summary>
