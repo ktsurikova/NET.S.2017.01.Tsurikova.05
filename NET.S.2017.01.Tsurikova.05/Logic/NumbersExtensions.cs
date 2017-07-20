@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration.Internal;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,7 +46,7 @@ namespace Logic
         /// <param name="b">second number</param>
         /// <param name="c">third number</param>
         /// <returns>common divisor for a, b and c</returns>
-        public static int Gcd(int a, int b, int c) => Gcd(Gcd(a, b), c);
+        public static int Gcd(int a, int b, int c) => Gcd3Arg(Gcd, a, b, c);
 
         /// <summary>
         /// calculate greatest common divisor for more then 3 numbers
@@ -52,19 +54,7 @@ namespace Logic
         /// <param name="arg">numbers for which calculates gcd</param>
         /// <exception cref="ArgumentNullException">throws when arg is null</exception>
         /// <returns>greatest common divisor for arg</returns>
-        public static int Gcd(int[] arg)
-        {
-            if (ReferenceEquals(arg, null)) throw new ArgumentNullException($"{nameof(arg)} is null");
-            if (arg.Length == 0) return 0;
-
-            int result = arg[0];
-            for (int i = 1; i < arg.Length; i++)
-            {
-                result = Gcd(result, arg[i]);
-            }
-
-            return result;
-        }
+        public static int Gcd(int[] arg) => GcdParamsArg(Gcd, arg);
 
         #endregion
 
@@ -77,18 +67,7 @@ namespace Logic
         /// <param name="b">second number</param>
         /// <param name="time">time elapsed</param>
         /// <returns>gcd for a and b</returns>
-        public static int Gcd(int a, int b, out long time)
-        {
-            Stopwatch watch = new Stopwatch();
-
-            watch.Start();
-            int result = Gcd(a, b);
-            watch.Stop();
-
-            time = watch.ElapsedMilliseconds;
-
-            return result;
-        }
+        public static int Gcd(int a, int b, out long time) => GcdTime2Arg(Gcd, a, b, out time);
 
         /// <summary>
         /// calculate gcd and define time elapsed
@@ -98,18 +77,7 @@ namespace Logic
         /// <param name="c">third number</param>
         /// <param name="time">time elapsed</param>
         /// <returns>gcd for a, b and c</returns>
-        public static int Gcd(int a, int b, int c, out long time)
-        {
-            Stopwatch watch = new Stopwatch();
-
-            watch.Start();
-            int result = Gcd(a, b, c);
-            watch.Stop();
-
-            time = watch.ElapsedMilliseconds;
-
-            return result;
-        }
+        public static int Gcd(int a, int b, int c, out long time) => GcdTime3Arg(Gcd, a, b, c, out time);
 
         /// <summary>
         /// calculate gcd and define time elapsed
@@ -117,18 +85,7 @@ namespace Logic
         /// <param name="arg">numbers for which gcd calculates</param>
         /// <param name="time">time elapsed</param>
         /// <returns>gcd for numbers</returns>
-        public static int Gcd(int[] arg, out long time)
-        {
-            Stopwatch watch = new Stopwatch();
-
-            watch.Start();
-            int result = Gcd(arg);
-            watch.Stop();
-
-            time = watch.ElapsedMilliseconds;
-
-            return result;
-        }
+        public static int Gcd(int[] arg, out long time) => GcdTimeParamsArg(Gcd, arg, out time);
 
         #endregion
 
@@ -178,7 +135,7 @@ namespace Logic
         /// <param name="b">second number</param>
         /// <param name="c">third number</param>
         /// <returns>common divisor for a, b and c</returns>
-        public static int GcdBinary(int a, int b, int c) => GcdBinary(GcdBinary(a, b), c);
+        public static int GcdBinary(int a, int b, int c) => Gcd3Arg(GcdBinary, a, b, c);
 
         /// <summary>
         /// calculate greatest common divisor for more then 3 numbers
@@ -186,19 +143,7 @@ namespace Logic
         /// <param name="arg">numbers for which calculates gcd</param>
         /// <exception cref="ArgumentNullException">throws when arg is null</exception>
         /// <returns>greatest common divisor for arg</returns>
-        public static int GcdBinary(int[] arg)
-        {
-            if (ReferenceEquals(arg, null)) throw new ArgumentNullException($"{nameof(arg)} is null");
-            if (arg.Length == 0) return 0;
-
-            int result = arg[0];
-            for (int i = 1; i < arg.Length; i++)
-            {
-                result = GcdBinary(result, arg[i]);
-            }
-
-            return result;
-        }
+        public static int GcdBinary(int[] arg) => GcdParamsArg(GcdBinary, arg);
 
         #endregion
 
@@ -211,18 +156,7 @@ namespace Logic
         /// <param name="b">second number</param>
         /// <param name="time">time elapsed</param>
         /// <returns>gcd for a and b</returns>
-        public static int GcdBinary(int a, int b, out long time)
-        {
-            Stopwatch watch = new Stopwatch();
-
-            watch.Start();
-            int result = GcdBinary(a, b);
-            watch.Stop();
-
-            time = watch.ElapsedMilliseconds;
-
-            return result;
-        }
+        public static int GcdBinary(int a, int b, out long time) => GcdTime2Arg(GcdBinary, a, b, out time);
 
         /// <summary>
         /// calculate gcd and define time elapsed
@@ -232,18 +166,7 @@ namespace Logic
         /// <param name="c">third number</param>
         /// <param name="time">time elapsed</param>
         /// <returns>gcd for a, b and c</returns>
-        public static int GcdBinary(int a, int b, int c, out long time)
-        {
-            Stopwatch watch = new Stopwatch();
-
-            watch.Start();
-            int result = GcdBinary(a, b, c);
-            watch.Stop();
-
-            time = watch.ElapsedMilliseconds;
-
-            return result;
-        }
+        public static int GcdBinary(int a, int b, int c, out long time) => GcdTime3Arg(GcdBinary, a, b, c, out time);
 
         /// <summary>
         /// calculate gcd and define time elapsed
@@ -251,12 +174,33 @@ namespace Logic
         /// <param name="arg">numbers for which gcd calculates</param>
         /// <param name="time">time elapsed</param>
         /// <returns>gcd for numbers</returns>
-        public static int GcdBinary(int[] arg, out long time)
+        public static int GcdBinary(int[] arg, out long time) => GcdTimeParamsArg(GcdBinary, arg, out time);
+
+        #endregion
+
+        private static int Gcd3Arg(Func<int, int, int> method, int a, int b, int c)
+            => method(a, method(b, c));
+
+        private static int GcdParamsArg(Func<int, int, int> method, int[] arg)
+        {
+            if (ReferenceEquals(arg, null)) throw new ArgumentNullException($"{nameof(arg)} is null");
+            if (arg.Length == 0) return 0;
+
+            int result = arg[0];
+            for (int i = 1; i < arg.Length; i++)
+            {
+                result = method(result, arg[i]);
+            }
+
+            return result;
+        }
+
+        private static int GcdTime2Arg(Func<int, int, int> method, int a, int b, out long time)
         {
             Stopwatch watch = new Stopwatch();
 
             watch.Start();
-            int result = GcdBinary(arg);
+            int result = method(a, b);
             watch.Stop();
 
             time = watch.ElapsedMilliseconds;
@@ -264,6 +208,30 @@ namespace Logic
             return result;
         }
 
-        #endregion
+        private static int GcdTime3Arg(Func<int, int, int, int> method, int a, int b, int c, out long time)
+        {
+            Stopwatch watch = new Stopwatch();
+
+            watch.Start();
+            int result = method(a, b, c);
+            watch.Stop();
+
+            time = watch.ElapsedMilliseconds;
+
+            return result;
+        }
+
+        private static int GcdTimeParamsArg(Func<int[], int> method, int[] arg, out long time)
+        {
+            Stopwatch watch = new Stopwatch();
+
+            watch.Start();
+            int result = method(arg);
+            watch.Stop();
+
+            time = watch.ElapsedMilliseconds;
+
+            return result;
+        }
     }
 }
